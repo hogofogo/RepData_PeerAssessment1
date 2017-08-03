@@ -49,7 +49,24 @@ for (i in 1:nrow(activity)) {
 daily_steps_i <- tapply(activity$steps, activity$date, sum)
 hist(daily_steps_i)
 
+# calculate mean and median, incl. imputed data
 mean_steps_i <- mean(daily_steps_i)
 median_steps_i <- median(daily_steps_i)
 print(c("mean number of steps =", mean_steps_i))
 print(c("median number of steps =", median_steps_i))
+
+# create weekend/weekday factor variable in data set complete with imputed data
+activity$wd <- as.character("")
+wdf <- c(1,7)
+for (i in 1:nrow(activity)) {
+      if (wday(activity[i, 2]) %in% wdf) {activity[i, 4] <- "weekend"} 
+            else {activity[i, 4] <- "weekday"}
+    }
+
+activity$wd <- as.factor(activity$wd)
+
+# make a panel plot of 5 min intervals across days for weekends/weekdays
+time_intervals_wd <- aggregate(steps ~ interval + wd, activity, mean)
+xyplot(steps ~ interval | wd, time_intervals_wd, type = "l", layout = c(1,2))
+
+
