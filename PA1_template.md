@@ -138,6 +138,7 @@ print(c("median number of steps, incl. imputed data =", median_steps_i))
 ## [2] "10766.1886792453"
 ```
 
+Adding imputed values affected median slightly and eliminated the difference between mean and median values.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
