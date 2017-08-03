@@ -55,6 +55,8 @@ median_steps_i <- median(daily_steps_i)
 print(c("mean number of steps, incl. imputed data =", mean_steps_i))
 print(c("median number of steps, incl. imputed data =", median_steps_i))
 
+# Adding imputed values affected median slightly and eliminated the difference between mean and median values.
+
 # create weekend/weekday factor variable in data set complete with imputed data
 library(lubridate)
 activity$wd <- as.character("")
