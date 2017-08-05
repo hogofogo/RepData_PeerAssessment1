@@ -1,6 +1,5 @@
 # Reproducible Research: Peer Assessment 1
 
-
 ## Loading and preprocessing the data
 
 ```r
@@ -24,7 +23,7 @@ act_na <- !is.na(activity[,1])
 act_clean <- activity[act_na, ]
 ```
 
-## What is mean total number of steps taken per day?
+## What is mean total number of steps taken per day? 
 
 
 ```r

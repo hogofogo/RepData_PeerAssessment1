@@ -5,7 +5,6 @@ output:
     keep_md: true
 ---
 
-
 ## Loading and preprocessing the data
 ```{r}
 #download data files; unzip to working directory
@@ -28,7 +27,7 @@ act_na <- !is.na(activity[,1])
 act_clean <- activity[act_na, ]
 ```
 
-## What is mean total number of steps taken per day?
+## What is mean total number of steps taken per day? 
 
 ```{r}
 # calculate total steps by day and build histogram
