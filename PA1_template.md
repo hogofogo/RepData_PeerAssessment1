@@ -39,20 +39,12 @@ hist(daily_steps)
 # calculate mean and median steps taken per day
 mean_steps <- mean(daily_steps)
 median_steps <- median(daily_steps)
-print(c("mean number of steps =", mean_steps))
+# print(c("mean number of steps =", mean_steps))
+# print(c("median number of steps =", median_steps))
 ```
+Mean number of steps = 10766.19.
+Median number of steps = 10765.
 
-```
-## [1] "mean number of steps =" "10766.1886792453"
-```
-
-```r
-print(c("median number of steps =", median_steps))
-```
-
-```
-## [1] "median number of steps =" "10765"
-```
 
 ```r
 # create a graph of 5 minute intervals 
@@ -60,17 +52,13 @@ time_intervals <- tapply(act_clean$steps, act_clean$interval, mean)
 plot(row.names(time_intervals), time_intervals, type = "l", ylab = "mean across all weeks", xlab = "5 min interval", main = "Mean steps taken in a given time interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-2.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
 ```r
 #estimate the time interval with highest mean daily value
-print(c("interval with highest mean daily value", names(which.max(time_intervals))))
+# print(c("interval with highest mean daily value", names(which.max(time_intervals))))
 ```
-
-```
-## [1] "interval with highest mean daily value"
-## [2] "835"
-```
+Interval with highest mean daily value is 835.
 
 ## Imputing missing values
 
@@ -91,16 +79,8 @@ library(lubridate)
 
 ```r
 library(lattice)
-# calculate the number of rows with NAs
-na_index <- sum(is.na(activity[,1]))
-print(c("rows with missing values", na_index))
-```
 
-```
-## [1] "rows with missing values" "2304"
-```
 
-```r
 # create parallel file with imputed values; use daily means as na substitute
 time_intervals <- data.frame(names(time_intervals), time_intervals)
 
@@ -114,28 +94,16 @@ daily_steps_i <- tapply(activity$steps, activity$date, sum)
 hist(daily_steps_i, xlab = "Daily steps", main = "Daily steps histogram, incl. imputed data")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 ```r
 # calculate mean and median, incl. imputed data
 mean_steps_i <- mean(daily_steps_i)
 median_steps_i <- median(daily_steps_i)
-print(c("mean number of steps, incl. imputed data =", mean_steps_i))
 ```
 
-```
-## [1] "mean number of steps, incl. imputed data ="
-## [2] "10766.1886792453"
-```
-
-```r
-print(c("median number of steps, incl. imputed data =", median_steps_i))
-```
-
-```
-## [1] "median number of steps, incl. imputed data ="
-## [2] "10766.1886792453"
-```
+Mean number of steps, incl. imputed data = 10766.19.
+Median number of steps, incl. imputed data = 10766.19.
 
 Adding imputed values affected median slightly and eliminated the difference between mean and median values.
 
@@ -152,10 +120,9 @@ for (i in 1:nrow(activity)) {
     }
 
 
-
 # make a panel plot of 5 min intervals across days for weekends/weekdays
 time_intervals_wd <- aggregate(steps ~ interval + wd, activity, mean)
 xyplot(steps ~ interval | wd, time_intervals_wd, type = "l", layout = c(1,2))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->

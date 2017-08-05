@@ -39,25 +39,27 @@ hist(daily_steps)
 # calculate mean and median steps taken per day
 mean_steps <- mean(daily_steps)
 median_steps <- median(daily_steps)
-print(c("mean number of steps =", mean_steps))
-print(c("median number of steps =", median_steps))
+# print(c("mean number of steps =", mean_steps))
+# print(c("median number of steps =", median_steps))
+```
+Mean number of steps = `r format(mean_steps, scientific = FALSE)`.
+Median number of steps = `r format(median_steps, scientific = FALSE)`.
 
-
+```{r}
 # create a graph of 5 minute intervals 
 time_intervals <- tapply(act_clean$steps, act_clean$interval, mean)
 plot(row.names(time_intervals), time_intervals, type = "l", ylab = "mean across all weeks", xlab = "5 min interval", main = "Mean steps taken in a given time interval")
 
 #estimate the time interval with highest mean daily value
-print(c("interval with highest mean daily value", names(which.max(time_intervals))))
+# print(c("interval with highest mean daily value", names(which.max(time_intervals))))
 ```
+Interval with highest mean daily value is `r names(which.max(time_intervals))`.
 
 ## Imputing missing values
 ``` {r}
 library(lubridate)
 library(lattice)
-# calculate the number of rows with NAs
-na_index <- sum(is.na(activity[,1]))
-print(c("rows with missing values", na_index))
+
 
 # create parallel file with imputed values; use daily means as na substitute
 time_intervals <- data.frame(names(time_intervals), time_intervals)
@@ -74,9 +76,10 @@ hist(daily_steps_i, xlab = "Daily steps", main = "Daily steps histogram, incl. i
 # calculate mean and median, incl. imputed data
 mean_steps_i <- mean(daily_steps_i)
 median_steps_i <- median(daily_steps_i)
-print(c("mean number of steps, incl. imputed data =", mean_steps_i))
-print(c("median number of steps, incl. imputed data =", median_steps_i))
 ```
+
+Mean number of steps, incl. imputed data = `r format(mean_steps_i, scientific = FALSE)`.
+Median number of steps, incl. imputed data = `r format(mean_steps_i, scientific = FALSE)`.
 
 Adding imputed values affected median slightly and eliminated the difference between mean and median values.
 
@@ -90,7 +93,6 @@ for (i in 1:nrow(activity)) {
       if (wday(activity[i, 2]) %in% wdf) {activity[i, 4] <- "weekend"} 
             else {activity[i, 4] <- "weekday"}
     }
-
 
 
 # make a panel plot of 5 min intervals across days for weekends/weekdays
